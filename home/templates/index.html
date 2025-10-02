@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block titulo %}Dashboard{% endblock titulo %}
+{% block contenido %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="card_header py-3">
+          <h5 class="card-title">Productos</h5>
+        </div>
+        <div class="row">
+          {% for p in productos %}
+          <div class="col-md-3">
+            <div class="card border-secondary" style="width: 18rem;">
+              <img class="card-img-top" src="{{p.imagen1.url}}" alt={{p.nombre}}"">
+              <div class="card-body">
+                <h5 class="card-title">{{p.nombre}}</h5>
+                <p class="card-text">${{p.precio}}</p>
+                <p class="card-text">{{p.descripcion}}</p>
+                <a class="btn btn-primary" href="{% url 'producto_detalle' p.id %}">Ver producto</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}

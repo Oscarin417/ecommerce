@@ -1,0 +1,43 @@
+{% extends "tabla.html" %}
+{% block titulo_tabla %}Productos{% endblock titulo_tabla %}
+{% block card_header %}
+<a href="{% url "producto_crear" %}" class="btn btn-outline-primary">
+    <i class="fas fa-plus"></i>
+</a>
+{% endblock card_header %}
+{% block thead %}
+<th>#</th>
+<th>Nombre</th>
+<th>Descripcion</th>
+<th>Precio</th>
+<th>Cantidad</th>
+<th>Marca</th>
+<th>Categoria</th>
+<th>Acciones</th>
+{% endblock thead %}
+{% block tbody %}
+{% for p in productos %}
+<tr>
+    <td>{{p.id}}</td>
+    <td>{{p.nombre}}</td>
+    <td>{{p.descripcion}}</td>
+    <td>${{p.precio}}</td>
+    <td>{{p.cantidad}}</td>
+    <td>{{p.marca.nombre}}</td>
+    <td>{{p.categoria.nombre}}</td>
+    <td>
+        <div class="btn-group" role="group">
+            <a href="{% url "producto_editar" p.id %}" class="btn btn-outline-warning">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            <form action="{% url "producto_eliminar" p.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+{% endblock tbody %}

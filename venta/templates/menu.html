@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block titulo %}Formas de pago{% endblock titulo %}
+{% block contenido %}
+<div class="row">
+	<div class="col-12">
+		<div class="card shadow mb-4">
+			<div class="card-body">
+				<div class="list-group">
+					<form action="{% url "paypal" %}" method="post" class="list-group-item list-group-item-action">
+						{% csrf_token %}
+            {% for id in ids %}
+              <input type="hidden" value="{{id}}" name="id">
+            {% endfor %}
+            {% for cantidad in cantidades %}
+              <input type="hidden" value="{{cantidad}}" name="cantidad">
+            {% endfor %}
+            {% for nombre in nombres %}
+              <input type="hidden" value="{{nombre}}" name="nombre">
+            {% endfor %}
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">Paypal</h5>
+							<small><i class="fab fa-paypal"></i></small>
+						</div>
+						<p class="mb-1">Realiza la compra desde tu cuenta de paypal</p>
+						<button type="submit" class="btn btn-primary">Seleccionar</button>
+					</form>
+					<form action="{% url "openpay" %}" method="post" class="list-group-item list-group-item-action">
+						{% csrf_token %}
+            {% for id in ids %}
+              <input type="hidden" value="{{id}}" name="id">
+            {% endfor %}
+            {% for cantidad in cantidades %}
+              <input type="hidden" value="{{cantidad}}" name="cantidad">
+            {% endfor %}
+            {% for nombre in nombres %}
+              <input type="hidden" value="{{nombre}}" name="nombre">
+            {% endfor %}
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">OpenPay</h5>
+						</div>
+						<p class="mb-1">Realiza el pago en efectivo</p>
+						<a href="https://www.paynet.com.mx/" target="_blank">Ver sucursales afiliadas</a>
+						<button type="submit" class="btn btn-primary">Seleccionar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock contenido %}

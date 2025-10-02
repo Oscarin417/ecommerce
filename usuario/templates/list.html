@@ -1,0 +1,45 @@
+{% extends "tabla.html" %}
+{% block titulo_tabla %}Usuarios{% endblock titulo_tabla %}
+{% block card_header %}
+<a class="btn btn-outline-primary" href="{% url "usuario_crear" %}">
+	<i class="fas fa-plus"></i>
+</a>
+{% endblock card_header %}
+{% block thead %}
+<th>#</th>
+<th>Nombre(s)</th>
+<th>Apellidos</th>
+<th>Usuario</th>
+<th>Rol</th>
+<th>Correo</th>
+<th>Celular</th>
+<th>Domicilio</th>
+<th>Acciones</th>
+{% endblock thead %}
+{% block tbody %}
+{% for u in usuarios %}
+<tr>
+	<td>{{u.id}}</td>
+	<td>{{u.first_name}}</td>
+	<td>{{u.last_name}}</td>
+	<td>{{u.username}}</td>
+	<td>{{u.roles}}</td>
+	<td>{{u.email}}</td>
+	<td>{{u.celular}}</td>
+	<td>{{u.domicilio}}</td>
+	<td>
+		<div class="btn-group" role="group">
+			<a class="btn btn-outline-warning" href="{% url "usuario_editar" u.id %}">
+				<i class="fas fa-pencil-alt"></i>
+			</a>
+			<form action="{% url "usuario_eliminar" u.id %}" method="post">
+				{% csrf_token %}
+				<button class="btn btn-outline-danger" type="submit">
+					<i class="fas fa-trash"></i>
+				</button>
+			</form>
+		</div>
+	</td>
+</tr>
+{% endfor %}
+{% endblock tbody %}

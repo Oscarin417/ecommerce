@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block titulo %}
+Carrito de compras
+{% endblock titulo %}
+{% block contenido %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <form action="{% url 'venta_crear' %}" method="post">
+          {% csrf_token %}
+          <div class="col-lg-12">
+            {% if request.session.productos %}
+            {% for nombre, producto in request.session.productos.items %}
+            <div class="card border-secondary mb-3 text-center">
+              <div class="card-body">
+                <input type="hidden" name="id" value="{{producto.id}}">
+                <input type="hidden" name="cantidad" value="{{producto.cantidad}}">
+                <h5 class="card-title">Producto: {{nombre}}</h5>
+                <p class="card-text">Cantidad: {{producto.cantidad}}</p>
+                <input type="hidden" name="nombre" value="{{producto.nombre}}">
+                <button 
+                  type="button" 
+                  class="btn btn-danger eliminar-producto" 
+                  data-nombre="{{producto.nombre}}">
+                  <i class="fas fa-times"></i>
+                  Eliminar
+                </button>
+              </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            No tienes productos en tu carrito
+            {% endif %}
+          </div>
+          {% if request.session.productos %}
+          <button 
+            type="submit" 
+            class="btn btn-success btn-lg btn-block">
+            Comprar
+          </button>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}
+{% block js %}
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';')
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim()
+        // Busca 'csrftoken='
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+          break
+        }
+      }
+    }
+    return cookieValue
+  }
+
+  const csrftoken = getCookie('csrftoken')
+
+  $(document).ready(function () {
+    $('.eliminar-producto').on('click', function () {
+      const productoNombre= $(this).data('nombre')
+
+      $.ajax({
+        url: '{% url "carrito_eliminar" %}', // Tu URL de eliminación
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        data: { nombre: productoNombre },
+        success: function (response) {
+          if (response.status === 'ok') {
+            location.reload(); // Recarga la página para reflejar el cambio
+          } else {
+            alert('No se pudo eliminar el producto.')
+          }
+        },
+        error: function () {
+          alert('Error al conectar con el servidor.')
+        }
+      })
+    })
+  })
+</script>
+{% endblock js %}

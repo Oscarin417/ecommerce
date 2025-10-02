@@ -1,0 +1,207 @@
+{% load static %}
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+  <!-- Sidebar Toggle (Topbar) -->
+  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <!-- Topbar Navbar -->
+  <ul class="navbar-nav ml-auto">
+
+    {% comment %}<!-- Nav Item - Search Dropdown (Visible Only XS) -->{% endcomment %}
+    {% comment %}<li class="nav-item dropdown no-arrow d-sm-none">{% endcomment %}
+      {% comment %}<a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">{% endcomment %}
+        {% comment %}<i class="fas fa-search fa-fw"></i>{% endcomment %}
+        {% comment %}</a>{% endcomment %}
+      {% comment %}<!-- Dropdown - Messages -->{% endcomment %}
+      {% comment %}<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+        aria-labelledby="searchDropdown">{% endcomment %}
+        {% comment %}<form class="form-inline mr-auto w-100 navbar-search">{% endcomment %}
+          {% comment %}<div class="input-group">{% endcomment %}
+            {% comment %}<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+              aria-label="Search" aria-describedby="basic-addon2">{% endcomment %}
+            {% comment %}<div class="input-group-append">{% endcomment %}
+              {% comment %}<button class="btn btn-primary" type="button">{% endcomment %}
+                {% comment %}<i class="fas fa-search fa-sm"></i>{% endcomment %}
+                {% comment %}</button>{% endcomment %}
+              {% comment %}</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</form>{% endcomment %}
+        {% comment %}</div>{% endcomment %}
+      {% comment %}</li>{% endcomment %}
+
+    {% comment %}<!-- Nav Item - Alerts -->{% endcomment %}
+    {% comment %}<li class="nav-item dropdown no-arrow mx-1">{% endcomment %}
+      {% comment %}<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">{% endcomment %}
+        {% comment %}<i class="fas fa-bell fa-fw"></i>{% endcomment %}
+        {% comment %}<!-- Counter - Alerts -->{% endcomment %}
+        {% comment %}<span class="badge badge-danger badge-counter">3+</span>{% endcomment %}
+        {% comment %}</a>{% endcomment %}
+      {% comment %}<!-- Dropdown - Alerts -->{% endcomment %}
+      {% comment %}<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" {% endcomment
+        %} {% comment %}aria-labelledby="alertsDropdown">{% endcomment %}
+        {% comment %}<h6 class="dropdown-header">{% endcomment %}
+          {% comment %}Alerts Center{% endcomment %}
+          {% comment %}</h6>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="mr-3">{% endcomment %}
+            {% comment %}<div class="icon-circle bg-primary">{% endcomment %}
+              {% comment %}<i class="fas fa-file-alt text-white"></i>{% endcomment %}
+              {% comment %}</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">December 12, 2019</div>{% endcomment %}
+            {% comment %}<span class="font-weight-bold">A new monthly report is ready to download!</span>{% endcomment
+            %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="mr-3">{% endcomment %}
+            {% comment %}<div class="icon-circle bg-success">{% endcomment %}
+              {% comment %}<i class="fas fa-donate text-white"></i>{% endcomment %}
+              {% comment %}</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">December 7, 2019</div>{% endcomment %}
+            {% comment %}$290.29 has been deposited into your account!{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="mr-3">{% endcomment %}
+            {% comment %}<div class="icon-circle bg-warning">{% endcomment %}
+              {% comment %}<i class="fas fa-exclamation-triangle text-white"></i>{% endcomment %}
+              {% comment %}</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">December 2, 2019</div>{% endcomment %}
+            {% comment %}Spending Alert: We've noticed unusually high spending for your account.{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>{% endcomment
+        %}
+        {% comment %}</div>{% endcomment %}
+      {% comment %}</li>{% endcomment %}
+
+    {% comment %}<!-- Nav Item - Messages -->{% endcomment %}
+    {% comment %}<li class="nav-item dropdown no-arrow mx-1">{% endcomment %}
+      {% comment %}<a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% endcomment %}
+        {% comment %}<i class="fas fa-envelope fa-fw"></i>{% endcomment %}
+        {% comment %}<!-- Counter - Messages -->{% endcomment %}
+        {% comment %}<span class="badge badge-danger badge-counter">7</span>{% endcomment %}
+        {% comment %}</a>{% endcomment %}
+      {% comment %}<!-- Dropdown - Messages -->{% endcomment %}
+      {% comment %}<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" {% endcomment
+        %} {% comment %}aria-labelledby="messagesDropdown">{% endcomment %}
+        {% comment %}<h6 class="dropdown-header">{% endcomment %}
+          {% comment %}Message Center{% endcomment %}
+          {% comment %}</h6>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="dropdown-list-image mr-3">{% endcomment %}
+            {% comment %}<img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">{% endcomment %}
+            {% comment %}<div class="status-indicator bg-success"></div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div class="font-weight-bold">{% endcomment %}
+            {% comment %}<div class="text-truncate">Hi there! I am wondering if you can help me with a{% endcomment %}
+              {% comment %}problem I've been having.</div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">Emily Fowler · 58m</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="dropdown-list-image mr-3">{% endcomment %}
+            {% comment %}<img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">{% endcomment %}
+            {% comment %}<div class="status-indicator"></div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div>{% endcomment %}
+            {% comment %}<div class="text-truncate">I have the photos that you ordered last month, how{% endcomment %}
+              {% comment %}would you like them sent to you?</div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">Jae Chun · 1d</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="dropdown-list-image mr-3">{% endcomment %}
+            {% comment %}<img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">{% endcomment %}
+            {% comment %}<div class="status-indicator bg-warning"></div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div>{% endcomment %}
+            {% comment %}<div class="text-truncate">Last month's report looks great, I am very happy with{% endcomment
+              %}
+              {% comment %}the progress so far, keep up the good work!</div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">Morgan Alvarez · 2d</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item d-flex align-items-center" href="#">{% endcomment %}
+          {% comment %}<div class="dropdown-list-image mr-3">{% endcomment %}
+            {% comment %}<img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" {% endcomment
+              %} {% comment %}alt="...">{% endcomment %}
+            {% comment %}<div class="status-indicator bg-success"></div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}<div>{% endcomment %}
+            {% comment %}<div class="text-truncate">Am I a good boy? The reason I ask is because someone{% endcomment %}
+              {% comment %}told me that people say this to all dogs, even if they aren't good...</div>{% endcomment %}
+            {% comment %}<div class="small text-gray-500">Chicken the Dog · 2w</div>{% endcomment %}
+            {% comment %}</div>{% endcomment %}
+          {% comment %}</a>{% endcomment %}
+        {% comment %}<a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>{%
+        endcomment %}
+        {% comment %}</div>{% endcomment %}
+      {% comment %}</li>{% endcomment %}
+    <li class="nav-item no-arrow mx-1">
+      <a href="{% url 'carrito' %}" class="nav-link">
+        <i class="fas fa-shopping-cart fa-fw"></i>
+        {% if request.session.cantidad_carrito %}
+          <span class="badge badge-danger badge-counter">
+            {{request.session.cantidad_carrito}}
+          </span> 
+        {% endif %}
+      </a>
+    </li>
+
+    <div class="topbar-divider d-none d-sm-block"></div>
+
+    <!-- Nav Item - User Information -->
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {% if request.user.is_authenticated %}
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{request.user.username}}</span>
+        {% else %}
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+        {% endif %}
+        <img class="img-profile rounded-circle" src="{% static 'img/undraw_profile.svg' %}">
+      </a>
+      <!-- Dropdown - User Information -->
+      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+        {% if request.user.is_authenticated %}
+        <a class="dropdown-item" href="{% url 'perfil' %}">
+          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+          Perfil
+        </a>
+        <a class="dropdown-item" href="{% url 'config' %}">
+          <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+          Configuracion
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{% url 'sinout' %}">
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          Logout
+        </a>
+        {% else %}
+        <a class="dropdown-item" href="{% url 'sigin' %}">
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          Iniciar Sesion
+        </a>
+        <a class="dropdown-item" href="{% url 'registro' %}">
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          Crear Cuenta
+        </a>
+        {% endif %}
+      </div>
+    </li>
+
+  </ul>
+
+</nav>

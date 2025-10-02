@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block titulo %}
+    {% if producto %}
+        Editar Producto 
+    {% else %}
+        Crear Producto
+    {% endif %}
+{% endblock titulo %}
+{% block contenido %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <form method="post" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <a href="{% url "producto" %}" class="btn btn-danger">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}

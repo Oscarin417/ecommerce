@@ -1,0 +1,5 @@
+{
+  "reportMissingTypeStubs": "none",
+  "reportUnknownMemberType": "none",
+  "reportAttributeAccessIssue": "none"
+}

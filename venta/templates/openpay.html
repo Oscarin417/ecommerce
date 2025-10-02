@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titulo %}Pago en efectivo{% endblock titulo %}
+{% block contenido %}
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">Generar ticket</h5>
+				<a class="btn btn-secondary" href="https://sandbox-dashboard.openpay.mx/paynet-pdf/{{id}}/{{pago_id}}" target="_blank">
+					Descargar ticket
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock contenido %}

@@ -1,0 +1,20 @@
+{% extends "tabla.html" %}
+{% block titulo_tabla %}Mis Compras{% endblock titulo_tabla %}
+{% block thead %}
+<th>Producto</th>
+<th>Cantidad</th>
+<th>Total</th>
+<th>Metodo</th>
+<th>Estatus</th>
+{% endblock thead %}
+{% block tbody %}
+{% for v in ventas %}
+<tr>
+	<td>{{v.producto.nombre}}</td>
+	<td>{{v.cantidad}}</td>
+	<td>{{v.total}}</td>
+	<td>{{v.pasarela.nombre}}</td>
+	<td>{{v.estatus_completo}}</td>
+</tr>
+{% endfor %}
+{% endblock tbody %}

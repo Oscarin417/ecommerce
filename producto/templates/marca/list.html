@@ -1,0 +1,35 @@
+{% extends "tabla.html" %}
+{% block titulo_tabla %}
+Marcas
+{% endblock titulo_tabla %}
+{% block card_header %}
+<a href="{% url "marca_crear" %}" class="btn btn-outline-primary">
+    <i class="fas fa-plus"></i>
+</a>
+{% endblock card_header %}
+{% block thead %}
+<th>#</th>
+<th>Nombre</th>
+<th>Acciones</th>
+{% endblock thead %}
+{% block tbody %}
+{% for m in marcas %}
+<tr>
+    <td>{{m.id}}</td>
+    <td>{{m.nombre}}</td>
+    <td>
+        <div class="btn-group" role="group">
+            <a href="{% url "marca_editar" m.id %}" class="btn btn-outline-warning">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            <form action="{% url "marca_eliminar" m.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+{% endblock tbody %}

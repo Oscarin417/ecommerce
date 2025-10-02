@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titulo %}Pago con PayPal{% endblock titulo %}
+{% block contenido %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card shadow mb-4">
+			<div class="card-body">
+				{{form.render}}
+				<a class="btn btn-danger" href="{% url "home" %}">
+					<i class="fas fa-times"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock contenido %}

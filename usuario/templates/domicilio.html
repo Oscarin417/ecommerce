@@ -1,0 +1,28 @@
+{% extends "tabla.html" %}
+{% block titulo_tabla %}Domiclios{% endblock titulo_tabla %}
+{% block thead %}
+<th>#</th>
+<th>Estado</th>
+<th>Municipio</th>
+<th>Colonia</th>
+<th>Codigo Postal</th>
+<th>Calle</th>
+<th>Numero Exterior</th>
+<th>Numoero Interior</th>
+<th>Refrencia</th>
+{% endblock thead %}
+{% block tbody %}
+{% for d in domicilios %}
+<tr>
+	<td>{{d.id}}</td>
+	<td>{{d.estado}}</td>
+	<td>{{d.municipio}}</td>
+	<td>{{d.colonia}}</td>
+	<td>{{d.cp}}</td>
+	<td>{{d.calle}}</td>
+	<td>{{d.ne}}</td>
+	<td>{{d.ni}}</td>
+	<td>{{d.referencia}}</td>
+</tr>
+{% endfor %}
+{% endblock tbody %}
