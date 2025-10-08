@@ -30,7 +30,7 @@ class Usuario(AbstractUser):
         (2, 'Empleado'),
         (3, 'Cliente')
     ]
-    rol = models.IntegerField(choices=ROLES, null=True, blank=True)
+    rol = models.IntegerField(choices=ROLES, null=True, blank=True, default=3)
     celular = models.CharField(max_length=13, null=True, blank=True)
     domicilio = models.ForeignKey(Domicilio, null=True, on_delete=models.SET_NULL)
     atributos = models.TextField(default={})

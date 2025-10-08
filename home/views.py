@@ -17,10 +17,10 @@ def home(request):
         'productos': productos,
     }
     if request.user.is_authenticated:
-        if usuario.rol == 3:
-            return render(request, 'index.html', context)
-        else:
+        if usuario.rol == 2 or usuario.rol == 1:
             return render(request, 'admin.html')
+        else:
+            return render(request, 'index.html', context)
     else:
         return render(request, 'index.html', context)
 
@@ -51,7 +51,6 @@ def register(request):
                 f = form.save(commit=False)
                 f.password = make_password(request.POST['password'])
                 f.domicilio = Domicilio.objects.create()
-                f.rol = 3
                 f.save()
                 login(request, f)
                 return redirect('home')
@@ -80,7 +79,6 @@ def configuracion(request):
                 u = op.create_client(user=usuario, domicilio=form)
                 usuario.atributos = json.dumps(u)
                 usuario.save()
-                return redirect('home')
             else:
                 print(form.errors)
         except Exception as e:
@@ -96,3 +94,15 @@ def compras(request):
 @login_required
 def carrito(request):
     return render(request, 'carrito.html')
+
+def forget_password(request):
+    return render(request, 'user/forget_password.html')
+
+def change_password(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = make_password(request.POST['password'])
+        user = get_object_or_404(Usuario, username=username)
+        user.password = password
+        user.save()
+        return render(request, 'change_password.html')

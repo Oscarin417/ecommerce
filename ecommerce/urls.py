@@ -27,7 +27,7 @@ urlpatterns = [
     path('usuarios/', include('usuario.urls')),
     path("ventas/", include('venta.urls')),
     path("paypal/", include('paypal.standard.ipn.urls')),
-    path('auth/', include('social_django.urls', namespace='social'))
+    path('auth/', include('social_django.urls', namespace='social')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, documento_root=settings.STATIC_ROOT)

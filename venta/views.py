@@ -5,13 +5,10 @@ from django.contrib.auth.decorators import login_required
 import json, os
 from producto.models import Producto
 from paypal.standard.forms import PayPalPaymentsForm
-from paypal.standard.models import ST_PP_COMPLETED, ST_PP_CANCELED_REVERSAL
-from paypal.standard.ipn.signals import valid_ipn_received
 from .models import Venta
 from utils.open_pay import Open_Pay
 from datetime import datetime
 from ecommerce.settings import PAYPAL_RECEIVER_EMAIL
-from pprint import pprint
 
 # Create your views here.
 @csrf_exempt
@@ -19,14 +16,8 @@ def openpay_webhook(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         description = data.get('transaction', {}).get('description', '')
-        list_descripcion = [desc.strip() for desc in description.split(',') if desc.strip()]
-        descripciones = ''
-        if len(list_descripcion) == 1:
-            descripciones = [desc.strip() for desc in description if desc.strip()]
-        else:
-            descripciones = list_descripcion
-
-        print(f"descripcion: {descripciones}")
+        descripciones = description.split(", ")
+        print(f"descripciones: {descripciones}")
 
         if data.get('transaction', {}).get('status', '') == 'completed':
             try:
@@ -44,28 +35,6 @@ def openpay_webhook(request):
                 print(f'error: {e}')
                 return HttpResponse(f'error: {e}', status=500)
         return HttpResponse('Webhook recibido con éxito', status=200)
-
-@csrf_exempt
-def paypal_status(sender, **kwargs):
-    ipn_obj = sender
-    pprint(ipn_obj)
-    venta = get_object_or_404(Venta, estatus='P', pasarela_id=1, fecha_creacion=ipn_obj.invoice)
-    if ipn_obj.status == ST_PP_COMPLETED and ipn_obj.receiver_email == PAYPAL_RECEIVER_EMAIL:
-        producto = venta.producto
-        venta.estatus = 'S'
-        venta.fecha_creacion = datetime.now()
-        venta.atributos = json.dumps(ipn_obj)
-        venta.save()
-        producto.cantidad -= venta.cantidad
-        producto.save()
-        print('venta completada')
-    elif ipn_obj.status == ST_PP_CANCELED_REVERSAL:
-        venta.estatus = 'C'
-        venta.save()
-    else:
-        print(f'estatus: {ipn_obj.status}')
-
-valid_ipn_received.connect(paypal_status)
 
 @login_required
 def venta_store(request):
@@ -144,13 +113,12 @@ def pago_openpay(request):
         ventas = []
         efectivo = {}
         nombres = ''
+        ids = request.POST.getlist('id')
+        cantidades = request.POST.getlist('cantidad')
+        nombres = request.POST.getlist('nombre')
         print(request.POST)
-        if isinstance(request.POST['nombre'], list) and isinstance(request.POST['cantidad'], list) and isinstance(request.POST['id'], list):
-            ids = request.POST.getlist('id')
-            cantidades = request.POST.getlist('cantidad')
-            nombres = request.POST.getlist('nombre')
+        if isinstance(nombres, list) and isinstance(cantidades, list) and isinstance(ids, list):
             print("se recibieron listas")
-            print(f"nombres: {nombres}")
             for producto_id, cantidad in zip(ids, cantidades):
                 product = get_object_or_404(Producto, pk=int(producto_id))
                 total = float(product.precio * int(cantidad))

@@ -30,7 +30,7 @@ class Open_Pay:
     def pago_referencia(self, cliente_id, concepto, monto):
         fecha = datetime.now()
         fecha_formato = fecha.strftime("%Y-%m-%dT%H:%M:%S")
-        fecha_plazo = fecha + timedelta(days=30)
+        fecha_plazo = fecha + timedelta(days=3)
         fecha_p_formato = fecha_plazo.strftime("%Y-%m-%dT%H:%M:%S")
         user = openpay.Customer.retrieve(cliente_id)
         charge = user.charges.create(
