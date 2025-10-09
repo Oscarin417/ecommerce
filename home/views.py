@@ -95,14 +95,3 @@ def compras(request):
 def carrito(request):
     return render(request, 'carrito.html')
 
-def forget_password(request):
-    return render(request, 'user/forget_password.html')
-
-def change_password(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = make_password(request.POST['password'])
-        user = get_object_or_404(Usuario, username=username)
-        user.password = password
-        user.save()
-        return render(request, 'change_password.html')
