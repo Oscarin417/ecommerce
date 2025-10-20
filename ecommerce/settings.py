@@ -45,11 +45,14 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "paypal.standard.ipn",
     "social_django",
+    "rest_framework",
+    "rest_framework.authtoken",
     #apps
     "usuario.apps.UsuarioConfig",
     "producto.apps.ProductoConfig",
     "home.apps.HomeConfig",
     "venta.apps.VentaConfig",
+    "api.apps.ApiConfig",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -176,3 +179,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}

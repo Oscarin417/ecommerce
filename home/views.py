@@ -8,7 +8,7 @@ from usuario.models import Domicilio, Usuario
 from producto.models import Producto
 from utils.open_pay import Open_Pay
 from venta.models import Venta
-
+from rest_framework.authtoken.models import Token
 # Create your views here.
 def home(request):
     usuario = request.user
@@ -17,6 +17,10 @@ def home(request):
         'productos': productos,
     }
     if request.user.is_authenticated:
+        try:
+            Token.objects.get(user=usuario)
+        except Token.DoesNotExist:
+            Token.objects.create(user=usuario)
         if usuario.rol == 2 or usuario.rol == 1:
             return render(request, 'admin.html')
         else:

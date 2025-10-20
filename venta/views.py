@@ -9,12 +9,14 @@ from .models import Venta
 from utils.open_pay import Open_Pay
 from datetime import datetime
 from ecommerce.settings import PAYPAL_RECEIVER_EMAIL
+from pprint import pprint
 
 # Create your views here.
 @csrf_exempt
 def openpay_webhook(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        pprint(data)
         description = data.get('transaction', {}).get('description', '')
         descripciones = description.split(", ")
         print(f"descripciones: {descripciones}")
@@ -34,6 +36,12 @@ def openpay_webhook(request):
             except Exception as e:
                 print(f'error: {e}')
                 return HttpResponse(f'error: {e}', status=500)
+        elif data.get('transaction', {}).get('status', '') == 'cancelled':
+            for d in descripciones:
+                producto = get_object_or_404(Producto, nombre=d)
+                venta = get_object_or_404(Venta, pasarela_id=2, estatus='P', producto=producto)
+                venta.estatus = 'C'
+                venta.save()
         return HttpResponse('Webhook recibido con éxito', status=200)
 
 @login_required
