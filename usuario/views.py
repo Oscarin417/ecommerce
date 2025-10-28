@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import *
 from .forms import *
-from utils.open_pay import Open_Pay
+from utils.openpay import OpenPay
 
 # Create your views here.
 @login_required
@@ -29,7 +29,7 @@ def usuario_store(request):
     df = DomicilioForm(request.POST or None)
     context = {'df': df,
                'uf': uf}
-    op = Open_Pay()
+    op = OpenPay()
 
     if request.method == 'POST':
         try:

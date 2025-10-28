@@ -1,12 +1,12 @@
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.hashers import make_password
+from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from usuario.forms import RegistroForm, DomicilioForm
 from usuario.models import Domicilio, Usuario
 from producto.models import Producto
-from utils.open_pay import Open_Pay
+from utils.openpay import OpenPay
 from venta.models import Venta
 from rest_framework.authtoken.models import Token
 # Create your views here.
@@ -49,19 +49,22 @@ def register(request):
 
     form = RegistroForm(request.POST or None)
     context = {'form': form}
-    if request.method=='POST':
-        try:
-            if form.is_valid():
+
+    if request.method == 'POST':
+        if form.is_valid():
+            with transaction.atomic():
                 f = form.save(commit=False)
-                f.password = make_password(request.POST['password'])
+                password = form.cleaned_data.get('password')  # o password1 según tu formulario
+                f.set_password(password)  # usa set_password en vez de make_password
                 f.domicilio = Domicilio.objects.create()
                 f.save()
-                login(request, f)
+
+            user = authenticate(request, username=f.username, password=password)
+            if user is not None:
+                login(request, user)
                 return redirect('home')
-            else:
-                print(form.errors)
-        except Exception as e:
-            print(f"error: {e}")
+        else:
+            print(form.errors)
     return render(request, 'registro.html', context)
 
 @login_required
@@ -74,7 +77,7 @@ def configuracion(request):
     usuario = get_object_or_404(Usuario, username=request.user)
     domicilio = usuario.domicilio
     form = DomicilioForm(request.POST or None, instance=domicilio)
-    op = Open_Pay()
+    op = OpenPay()
     context = {'form': form}
     if request.method == 'POST':
         try:

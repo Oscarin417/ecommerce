@@ -6,7 +6,7 @@ import json, os
 from producto.models import Producto
 from paypal.standard.forms import PayPalPaymentsForm
 from .models import Venta
-from utils.open_pay import Open_Pay
+from utils.openpay import OpenPay
 from datetime import datetime
 from ecommerce.settings import PAYPAL_RECEIVER_EMAIL
 from pprint import pprint
@@ -110,7 +110,7 @@ def pago_paypal(request):
 def pago_openpay(request):
     usuario = request.user
     atributos = json.loads(usuario.atributos) if usuario.atributos else {}
-    op = Open_Pay()
+    op = OpenPay()
     if not atributos:
         u = op.create_client(user=usuario, domicilio=usuario.domicilio)
         usuario.atributos = json.dumps(u)
